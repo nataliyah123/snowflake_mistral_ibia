@@ -1,5 +1,6 @@
 from trulens.apps.langchain import TruChain
-from trulens.feedback import Feedback, Groundedness
+from trulens.core import Feedback
+from trulens.feedback.v2.feedback import Groundedness
 from trulens.feedback.provider.openai import OpenAI as OpenAIFeedback
 import data_utils
 import llm_utils
