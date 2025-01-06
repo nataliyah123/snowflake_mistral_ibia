@@ -1,15 +1,17 @@
-from trulens_eval import Tru, Feedback, TruLlama
-from trulens_eval.feedback import Groundedness
-from trulens_eval.feedback.provider.openai import OpenAI as OpenAIFeedback
+from trulens import Tru, Feedback, TruChain
+from trulens.feedback import Groundedness
+from trulens.feedback.provider.openai import OpenAI as OpenAIFeedback
+import data_utils
+import llm_utils
 import config
 
 openai = OpenAIFeedback()
 
 def get_groundedness():
-  """
-  Returns the trulens groundedness feedback.
-  """
-  return Groundedness(groundedness_provider=openai)
+    """
+    Returns the TruLens groundedness feedback.
+    """
+    return Groundedness(groundedness_provider=openai)
 
 def setup_trulens(app_id, search_table, db_connection):
   """
@@ -27,16 +29,16 @@ def setup_trulens(app_id, search_table, db_connection):
       response = llm_utils.generate_llm_response(prompt, context_string, db_connection)
       return response
   
-  tru_llama = TruLlama(
+  tru_chain = TruChain(
         app_id=app_id,
         app_fn=run_rag,
         feedbacks=[
-            grounded.groundedness_measure.on(
-                text=grounded.groundedness_measure.on_output_text,
-                context=grounded.groundedness_measure.on_input_text
+            grounded.on(
+                text=grounded.on_output_text,
+                context=grounded.on_input_text
             ).with_name("Groundedness"),
            f_relevance
        ],
         config={"project_name": config.TRULENS_PROJECT_NAME}
     )
-  return tru_llama
+  return tru_chain
