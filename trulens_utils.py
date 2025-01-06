@@ -1,4 +1,4 @@
-from trulens import  TruChain
+from trulens.apps.langchain import TruChain
 from trulens.feedback import Feedback, Groundedness
 from trulens.feedback.provider.openai import OpenAI as OpenAIFeedback
 import data_utils
