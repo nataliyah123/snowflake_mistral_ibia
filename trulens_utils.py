@@ -1,4 +1,4 @@
-from trulens import Tru, Feedback, TruChain
+from trulens import Feedback, TruChain
 from trulens.feedback import Groundedness
 from trulens.feedback.provider.openai import OpenAI as OpenAIFeedback
 import data_utils
@@ -15,7 +15,7 @@ def get_groundedness():
 
 def setup_trulens(app_id, search_table, db_connection):
   """
-    Sets up TruLens feedback functions and returns the instrumented Llama.
+    Sets up TruLens feedback functions and returns the instrumented TruChain.
     Requires: trulens_utils.groundedness, data_utils.snowflake_search, llm_utils.generate_llm_response
   """
 

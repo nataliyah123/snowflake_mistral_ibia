@@ -15,8 +15,8 @@ if st.button("Get Answer"):
     if search_table and user_query:
         with st.spinner("Searching and generating..."):
             try:
-                tru_llama = trulens_utils.setup_trulens(app_id="Snowflake_RAG_App", search_table=search_table, db_connection=db_connection)
-                response = tru_llama.app(user_query)
+                tru_chain = trulens_utils.setup_trulens(app_id="Snowflake_RAG_App", search_table=search_table, db_connection=db_connection)
+                response = tru_chain.app(user_query) # We are calling the app via the TruChain object
                 st.write("Answer:", response)
             except Exception as e:
               st.error(f"An error occured: {e}")
