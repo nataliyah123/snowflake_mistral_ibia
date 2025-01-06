@@ -3,3 +3,4 @@ snowflake-connector-python
 pandas 
 trulens
 openai
+trulens-apps-langchain
